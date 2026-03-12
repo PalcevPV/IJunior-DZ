@@ -6,6 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Enemy _prefab;
     [SerializeField] private List<Vector3> _spawnPoints = new List<Vector3>();
+    private WaitForSeconds _spawnWait;
+
 
     private Coroutine _coroutine;
     private float _spawnDelay = 2f;
@@ -14,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         _coroutine = StartCoroutine(SpawLoop());
+        _spawnWait = new WaitForSeconds(_spawnDelay);
     }
 
     private void SpawnEnemy()
@@ -37,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (_isActive)
         {
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return _spawnWait;
             SpawnEnemy();
         }
     }

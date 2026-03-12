@@ -455,7 +455,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920073a911e2a854992e2a7cad22a86d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefab: {fileID: 1197923149682491259, guid: 26b86fffc5819e14d907b25019f4c0db, type: 3}
+  _prefab: {fileID: 2284300470119484558, guid: 937ed9f2ab75044489e0e45db80d9cf8, type: 3}
+  _spawnPoints:
+  - {x: 0, y: 1, z: 0}
+  - {x: 5, y: 1, z: 0}
+  - {x: 10, y: 1, z: 0}
 --- !u!4 &1009424643
 Transform:
   m_ObjectHideFlags: 0
