@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5977873958391281930
+--- !u!1001 &8212409957908907819
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -62,15 +62,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
       propertyPath: m_Name
-      value: Ch43_nonPBR (2)
+      value: SneakingEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: f7455e499f5d9f94fa62e56f6dfc98f9, type: 2}
+      objectReference: {fileID: 9100000, guid: 39d93d556e8fb77449c53be09f7e8917, type: 2}
     - target: {fileID: 5866666021909216657, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
+        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Walking (1)'"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -78,53 +84,23 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2925428403545708633}
+      addedObject: {fileID: 5898062755349757859}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -8843657533774489380}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5011646888813664694}
+      addedObject: {fileID: 62590944843799916}
   m_SourcePrefab: {fileID: 100100000, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
---- !u!1 &6788267556843373659 stripped
+--- !u!1 &9023312089078807162 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c07ab9efbf10f2540b5443d9a1d211fe, type: 3}
-  m_PrefabInstance: {fileID: 5977873958391281930}
+  m_PrefabInstance: {fileID: 8212409957908907819}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &2925428403545708633
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788267556843373659}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &-8843657533774489380
+--- !u!136 &5898062755349757859
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788267556843373659}
+  m_GameObject: {fileID: 9023312089078807162}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -141,15 +117,16 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.46, z: 0}
---- !u!114 &5011646888813664694
+--- !u!114 &62590944843799916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6788267556843373659}
+  m_GameObject: {fileID: 9023312089078807162}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5883944d22b21534f913c8874ad07583, type: 3}
+  m_Script: {fileID: 11500000, guid: a5a3f0d865ed3f447b6e612cc0c2a758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 4

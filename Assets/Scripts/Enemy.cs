@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
-    private Vector3 _direction;
-    private float _speed = 10f;
+    [SerializeField] private float _speed;
+    private Target _target;
+
+    public void Initialize(Target target)
+    {
+        _target = target;
+    }
 
     private void Update()
     {
@@ -12,12 +17,7 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        transform.position += _direction * _speed * Time.deltaTime;
-    }
-
-    public void SetDirection(Vector3 direction)
-    {
-        _direction = direction.normalized;
-        transform.rotation = Quaternion.LookRotation(_direction);
+        transform.LookAt(_target.transform);
+        transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _speed * Time.deltaTime);
     }
 }
