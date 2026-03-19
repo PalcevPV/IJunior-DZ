@@ -8,13 +8,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
     private WaitForSeconds _spawnWait;
 
-    private Coroutine _coroutine;
     private float _spawnDelay = 2f;
     private bool _isActive = true;
 
     private void Start()
     {
-        _coroutine = StartCoroutine(SpawLoop());
+        StartCoroutine(SpawLoop());
         _spawnWait = new WaitForSeconds(_spawnDelay);
     }
 
