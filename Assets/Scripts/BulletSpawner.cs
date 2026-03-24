@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-public class InstantiateBulletsShooting : MonoBehaviour
+public class BulletSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Transform _target;
