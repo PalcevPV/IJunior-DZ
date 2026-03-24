@@ -11,10 +11,10 @@ public class InstantiateBulletsShooting : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(ShootingWorker());
+        StartCoroutine(Shoot());
     }
 
-    private IEnumerator ShootingWorker()
+    private IEnumerator Shoot()
     {
         bool isWork = true;
 
