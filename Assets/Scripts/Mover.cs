@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class MoveThroughPoints : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     [SerializeField] private List<Transform> _waypoints;
     private float _speed = 10f;
