@@ -5,9 +5,9 @@ using System.Collections;
 public class InstantiateBulletsShooting : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;
+    [SerializeField] private Transform _target;
     [SerializeField] private float _speed = 10f;
     [SerializeField] private float _timeWaitShooting = 2f;
-    [SerializeField] private Transform _target;
 
     void Start()
     {
