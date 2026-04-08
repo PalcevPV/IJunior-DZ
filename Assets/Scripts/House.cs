@@ -12,6 +12,12 @@ public class House : MonoBehaviour
         _collisionHandler.LeftTheHouse += AlarmDisable;
     }
 
+    private void OnDisable()
+    {
+        _collisionHandler.EnteredTheHouse -= AlarmEnable;
+        _collisionHandler.LeftTheHouse -= AlarmDisable;
+    }
+
     private void AlarmEnable()
     {
         _alarm.SetMaxVolume();
@@ -33,11 +39,5 @@ public class House : MonoBehaviour
         }
 
         _alarm.HouseAlarm.Stop();
-    }
-
-    private void OnDisable()
-    {
-        _collisionHandler.EnteredTheHouse -= AlarmEnable;
-        _collisionHandler.LeftTheHouse -= AlarmDisable;
     }
 }

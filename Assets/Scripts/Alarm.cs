@@ -4,6 +4,7 @@ using UnityEngine;
 public class Alarm : MonoBehaviour
 {
     [SerializeField] private AudioSource _houseAlarm;
+
     private float _fadeSpeed = 0.5f;
     private float _minVolume = 0.001f;
     private float _maxVolume = 1;
@@ -13,6 +14,22 @@ public class Alarm : MonoBehaviour
 
     public AudioSource HouseAlarm => _houseAlarm;
     public float MinVolume => _minVolume;   
+
+    public void SetMaxVolume()
+    {
+        _houseAlarm.volume = _minVolume;
+        _targetVolume = _maxVolume;
+
+        StartFadeCoroitine();
+    }
+
+    public void SetMinVolume()
+    {
+        _houseAlarm.volume = _maxVolume;
+        _targetVolume = _minVolume;
+
+        StartFadeCoroitine();
+    }
 
     private IEnumerator Fade()
     {
@@ -29,22 +46,6 @@ public class Alarm : MonoBehaviour
 
             yield return null;
         }
-    }
-
-    public void SetMaxVolume()
-    {
-        _houseAlarm.volume = _minVolume;
-        _targetVolume = _maxVolume;
-
-        StartFadeCoroitine();
-    }
-
-    public void SetMinVolume()
-    {
-        _houseAlarm.volume = _maxVolume;
-        _targetVolume = _minVolume;
-
-        StartFadeCoroitine();
     }
 
     private void StartFadeCoroitine()

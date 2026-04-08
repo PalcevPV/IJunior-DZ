@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CollisionHandler : MonoBehaviour
 {
-    public Action EnteredTheHouse;
-    public Action LeftTheHouse;
+    public event Action EnteredTheHouse;
+    public event Action LeftTheHouse;
 
     private void OnTriggerEnter(Collider other)
     {
