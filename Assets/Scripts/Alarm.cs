@@ -9,6 +9,7 @@ public class Alarm : MonoBehaviour
     private float _maxVolume = 1;
     private float _targetVolume;
     private bool _isActive;
+    private Coroutine _coroutine;
 
     public AudioSource HouseAlarm => _houseAlarm;
     public float MinVolume => _minVolume;   
@@ -34,13 +35,25 @@ public class Alarm : MonoBehaviour
     {
         _houseAlarm.volume = _minVolume;
         _targetVolume = _maxVolume;
-        StartCoroutine(Fade());
+
+        StartFadeCoroitine();
     }
 
     public void SetMinVolume()
     {
         _houseAlarm.volume = _maxVolume;
         _targetVolume = _minVolume;
-        StartCoroutine(Fade());
+
+        StartFadeCoroitine();
+    }
+
+    private void StartFadeCoroitine()
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+
+        _coroutine = StartCoroutine(Fade());
     }
 }
