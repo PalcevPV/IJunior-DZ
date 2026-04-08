@@ -1,39 +1,46 @@
+using System.Collections;
 using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    [SerializeField] private AudioSource _alarm;
+    [SerializeField] private AudioSource _houseAlarm;
     private float _fadeSpeed = 0.5f;
     private float _minVolume = 0.001f;
     private float _maxVolume = 1;
     private float _targetVolume;
+    private bool _isActive;
 
-    private void OnTriggerEnter(Collider other)
+    public AudioSource HouseAlarm => _houseAlarm;
+    public float MinVolume => _minVolume;   
+
+    private IEnumerator Fade()
     {
-        if (other.TryGetComponent(out Thief thief))
+        _isActive = true;
+
+        while (_isActive)
         {
-            _alarm.volume = _minVolume;
-            _targetVolume = _maxVolume;
-            _alarm.Play();
+            _houseAlarm.volume = Mathf.MoveTowards(_houseAlarm.volume, _targetVolume, _fadeSpeed * Time.deltaTime);
+
+            if (_houseAlarm.volume == _targetVolume)
+            {
+                _isActive = false;
+            }
+
+            yield return null;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void SetMaxVolume()
     {
-        if (other.TryGetComponent(out Thief thief))
-        {
-            _alarm.volume = _maxVolume;
-            _targetVolume = _minVolume;
-        }
+        _houseAlarm.volume = _minVolume;
+        _targetVolume = _maxVolume;
+        StartCoroutine(Fade());
     }
 
-    private void Update()
+    public void SetMinVolume()
     {
-        _alarm.volume = Mathf.MoveTowards(_alarm.volume, _targetVolume, _fadeSpeed * Time.deltaTime);
-
-        if (_alarm.volume <= _minVolume)
-        {
-            _alarm.Stop();
-        }
+        _houseAlarm.volume = _maxVolume;
+        _targetVolume = _minVolume;
+        StartCoroutine(Fade());
     }
 }
