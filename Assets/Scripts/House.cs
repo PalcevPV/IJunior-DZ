@@ -40,4 +40,4 @@ public class House : MonoBehaviour
 
         _alarm.HouseAlarm.Stop();
     }
-}
+} 
