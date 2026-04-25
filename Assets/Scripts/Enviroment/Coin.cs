@@ -4,7 +4,7 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     private SpawnPoint _spawnPoint;
-    public event Action<Coin> OnCollected;
+    public event Action<Coin> IsCollected;
 
     public SpawnPoint SpawnPoint => _spawnPoint;
 
@@ -15,6 +15,6 @@ public class Coin : MonoBehaviour
 
     public void Pick()
     {
-        OnCollected?.Invoke(this);
+        IsCollected?.Invoke(this);
     }
 }

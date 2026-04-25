@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class CoinCollector : MonoBehaviour
 {
-    private Coin _coin;
+    private Player _player;
 
     private void Awake()
     {
-        _coin = GetComponent<Coin>();
+        _player = GetComponent<Player>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out Player player))
+        if (collision.TryGetComponent(out Coin coin))
         {
-            _coin.Pick();
-            player.CollectCoin();
+            coin.Pick();
+            _player.CollectCoin();
         }
     }
 }

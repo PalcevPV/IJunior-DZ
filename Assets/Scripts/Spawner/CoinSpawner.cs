@@ -44,7 +44,7 @@ public class CoinSpawner : MonoBehaviour
 
             coin.transform.position = spawnPoint.transform.position;
             coin.Initilization(spawnPoint);
-            coin.OnCollected += ReturnCoin;
+            coin.IsCollected += ReturnCoin;
 
             spawnPoint.IsBusy = true;
         }
@@ -53,7 +53,7 @@ public class CoinSpawner : MonoBehaviour
     private void ReturnCoin(Coin coin)
     {
         coin.SpawnPoint.IsBusy = false;
-        coin.OnCollected -= ReturnCoin;
+        coin.IsCollected -= ReturnCoin;
         _pool.Release(coin);
     }
 
