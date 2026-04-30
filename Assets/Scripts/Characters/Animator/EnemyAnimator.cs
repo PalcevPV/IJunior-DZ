@@ -1,20 +1,13 @@
 using UnityEngine;
 
-public class PlayerAnimator : MonoBehaviour
+public class EnemyAnimator : MonoBehaviour
 {
     private Animator _animator;
-
-    private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Attack = Animator.StringToHash("Attack");
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-    }
-
-    public void UpdateMovement(float moveInput, bool isGrounded)
-    {
-        _animator.SetBool(IsMoving, moveInput != 0f && isGrounded);
     }
 
     public void PlayAttack()

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class CoinSpawner : MonoBehaviour
+public class HealthPackSpawner : MonoBehaviour
 {
-    [SerializeField] private Coin _prefab;
+    [SerializeField] private HealthPack _prefab;
     [SerializeField] private List<SpawnPoint> _spawnPoints;
 
     private WaitForSeconds _spawnWait;
@@ -14,18 +14,24 @@ public class CoinSpawner : MonoBehaviour
     private float _spawnDelay = 2f;
     private bool _isActive = true;
 
-    private ObjectPool<Coin> _pool;
+    private ObjectPool<HealthPack> _pool;
 
     private void Awake()
     {
-        _pool = new ObjectPool<Coin>(
+        _pool = new ObjectPool<HealthPack>(
             createFunc: () => Instantiate(_prefab),
-            actionOnGet: (coin) => coin.gameObject.SetActive(true),
-            actionOnRelease: (coin) => coin.gameObject.SetActive(false),
-            actionOnDestroy: (coin) => Destroy(coin.gameObject),
+            actionOnGet: (healthPack) => ActionOnGet(healthPack),
+            actionOnRelease: (healthPack) => healthPack.gameObject.SetActive(false),
+            actionOnDestroy: (healthPack) => Destroy(healthPack.gameObject),
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
+    }
+
+    private void ActionOnGet(HealthPack healthPack)
+    {
+        healthPack.gameObject.SetActive(true);
+        healthPack.ResetState();
     }
 
     private void Start()
@@ -40,21 +46,26 @@ public class CoinSpawner : MonoBehaviour
 
         if (spawnPoint.IsBusy == false)
         {
-            Coin coin = _pool.Get();
+            HealthPack healthPack = _pool.Get();
 
-            coin.transform.position = spawnPoint.transform.position;
-            coin.Initilization(spawnPoint);
-            coin.IsCollected += ReturnCoin;
+            healthPack.transform.position = spawnPoint.transform.position;
+            healthPack.Initilization(spawnPoint);
+            healthPack.IsCollected += ReturnCoin;
 
-            spawnPoint.IsBusy = true;
+            spawnPoint.Enable();
+        }
+
+        else
+        {
+            Debug.Log("Busy");
         }
     }
 
-    private void ReturnCoin(Coin coin)
+    private void ReturnCoin(HealthPack healthPack)
     {
-        coin.SpawnPoint.IsBusy = false;
-        coin.IsCollected -= ReturnCoin;
-        _pool.Release(coin);
+        healthPack.SpawnPoint.Disable();
+        healthPack.IsCollected -= ReturnCoin;
+        _pool.Release(healthPack);
     }
 
     private SpawnPoint GetRandomSpawnPoint()

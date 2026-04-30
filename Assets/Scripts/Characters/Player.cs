@@ -6,9 +6,8 @@ public class Player : MonoBehaviour
     private InputReader _inputReader;
     private GroundChecker _groundChecker;
     private PlayerMover _playerMover;
+    private AttackSystem _attackSystem;
     private Rotater _rotation;
-
-    private int _coinCount = 0;
 
     private void Awake()
     {
@@ -17,6 +16,7 @@ public class Player : MonoBehaviour
         _groundChecker = GetComponent<GroundChecker>();
         _playerMover = GetComponent<PlayerMover>();
         _rotation = GetComponent<Rotater>();
+        _attackSystem = GetComponent<AttackSystem>();
     }
 
     private void FixedUpdate()
@@ -30,16 +30,17 @@ public class Player : MonoBehaviour
         {
             _playerMover.Jump();
         }
+
+        if (_inputReader.GetIsAttack())
+        {
+            if(_attackSystem.TryAttack())
+                _animator.PlayAttack();
+        }
     }
 
     private void Update()
     {
         _rotation.Flip(_inputReader.Direction);
         _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);
-    }
-
-    public void CollectCoin()
-    {
-        _coinCount++;
     }
 }
