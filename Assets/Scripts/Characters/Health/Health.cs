@@ -13,8 +13,11 @@ abstract class Health : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        _currentHealth -= damage;
-        ClampHealth();
+        if (damage > 0)
+        {
+            _currentHealth -= damage;
+            ClampHealth();
+        }     
     }
 
     protected void ClampHealth()

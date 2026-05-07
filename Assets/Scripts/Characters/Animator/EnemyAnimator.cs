@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class EnemyAnimator : MonoBehaviour
 {
-    private Animator _animator;
     private static readonly int Attack = Animator.StringToHash("Attack");
+
+    private Animator _animator;
 
     private void Awake()
     {

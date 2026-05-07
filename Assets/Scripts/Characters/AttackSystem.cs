@@ -7,16 +7,17 @@ public class AttackSystem : MonoBehaviour
     [SerializeField] private float _radius = 1;
     [SerializeField] private LayerMask _targetMask;
 
-    private float _attackCooldown = 1.5f;
-    private float _lastAttackTime;
+    private float _attackCooldown = 1f;
+    private float _nextAttackTime;
     private int _damage = 25;
 
     public bool TryAttack()
     {
-        if (CanAttack())
+        if (Time.time >= _nextAttackTime)
         {
-            _lastAttackTime = Time.time;
             Attack();
+            _nextAttackTime = Time.time + _attackCooldown;
+
             return true;
         }
 
@@ -38,10 +39,5 @@ public class AttackSystem : MonoBehaviour
                 }
             }
         }
-    }
-
-    private bool CanAttack()
-    {
-        return Time.time >= _lastAttackTime + _attackCooldown;
     }
 }

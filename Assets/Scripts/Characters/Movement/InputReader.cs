@@ -6,6 +6,8 @@ public class InputReader : MonoBehaviour
 
     private bool _isJump;
     private bool _isAttack;
+    private int _attackButton = 0;
+    private KeyCode _jumpButton = KeyCode.Space;
 
     public float Direction { get; private set; }
 
@@ -13,12 +15,12 @@ public class InputReader : MonoBehaviour
     {
         Direction = Input.GetAxisRaw(Horizontal);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(_jumpButton))
         {
             _isJump = true;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(_attackButton))
         {
             _isAttack = true;
         }

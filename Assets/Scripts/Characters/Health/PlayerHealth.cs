@@ -4,7 +4,10 @@ using UnityEngine;
 {
     public void Heal(int healAmount)
     {
-        _currentHealth += healAmount;
-        ClampHealth();
+        if (healAmount > 0)
+        {
+            _currentHealth += healAmount;
+            ClampHealth();
+        }        
     }
 }

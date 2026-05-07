@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    private Animator _animator;
-
     private static readonly int IsMoving = Animator.StringToHash("IsMoving");
     private static readonly int Attack = Animator.StringToHash("Attack");
+
+    private Animator _animator;
 
     private void Awake()
     {
