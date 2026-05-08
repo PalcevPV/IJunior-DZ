@@ -2,26 +2,26 @@ using UnityEngine;
 
 abstract class Health : MonoBehaviour, IDamageable
 {
-    protected int _maxHealth = 100;
-    protected int _minHealth = 0;
-    protected int _currentHealth;
+    protected int _maxValue = 100;
+    protected int _minValue = 0;
+    protected int _currentValue;
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        _currentValue = _maxValue;
     }
 
     public void TakeDamage(int damage)
     {
         if (damage > 0)
         {
-            _currentHealth -= damage;
-            ClampHealth();
+            _currentValue -= damage;
+            ClampValue();
         }     
     }
 
-    protected void ClampHealth()
+    protected void ClampValue()
     {
-        _currentHealth = Mathf.Clamp(_currentHealth, _minHealth, _maxHealth);
+        _currentValue = Mathf.Clamp(_currentValue, _minValue, _maxValue);
     }
 }

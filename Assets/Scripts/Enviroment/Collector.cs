@@ -3,19 +3,14 @@ using UnityEngine;
 
 public class Collector : MonoBehaviour
 {
-    public event Action<HealthPack> HealthPackTriggerEntered;
-    public event Action<Coin> CoinTriggerEntered;
+    public event Action<Collectible> TriggerEntered;
 
     private void OnTriggerEnter2D(Collider2D item)
     {
-        if (item.TryGetComponent(out HealthPack healthPack))
+        if (item.TryGetComponent(out Collectible collectible))
         {
-            HealthPackTriggerEntered?.Invoke(healthPack);
-        }
-
-        if (item.TryGetComponent(out Coin coin))
-        {
-            CoinTriggerEntered?.Invoke(coin);
+            TriggerEntered?.Invoke(collectible);
+            Debug.Log(collectible.GetType());
         }
     }
 }

@@ -30,14 +30,12 @@ public class Player : MonoBehaviour
 
     private void OnEnable()
     {
-        _collisionHandler.HealthPackTriggerEntered += CollectHealthPack;
-        _collisionHandler.CoinTriggerEntered += CollectCoin;
+        _collisionHandler.TriggerEntered += CollectItem;
     }
 
     private void OnDisable()
     {
-        _collisionHandler.HealthPackTriggerEntered -= CollectHealthPack;
-        _collisionHandler.CoinTriggerEntered -= CollectCoin;
+        _collisionHandler.TriggerEntered -= CollectItem;
     }
 
     private void FixedUpdate()
@@ -66,21 +64,35 @@ public class Player : MonoBehaviour
         if (direction != _lastDirection)
         {
             _rotation.Flip(_inputReader.Direction);
-            _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);
-
             _lastDirection = direction;
         }
+
+        _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);
     }
 
-    private void CollectHealthPack(HealthPack healthPack)
+    private void CollectItem(Collectible collectible)
     {
-        _health.Heal(healthPack.HealAmount);
-        healthPack.Pick();
+        switch (collectible)
+        {
+            case Coin coin:
+                CollectCoin(coin);
+                break;
+
+            case HealthPack healthPack:
+                CollectHealthPack(healthPack);
+                break;
+        }
     }
 
     private void CollectCoin(Coin coin)
     {
         _bag.AddCoin();
         coin.Pick();
+    }
+
+    private void CollectHealthPack(HealthPack healthPack)
+    {
+        _health.TakeHeal(healthPack.HealAmount);
+        healthPack.Pick();
     }
 }

@@ -2,12 +2,12 @@ using UnityEngine;
 
  class PlayerHealth : Health, IHealable
 {
-    public void Heal(int healAmount)
+    public void TakeHeal(int healAmount)
     {
         if (healAmount > 0)
         {
-            _currentHealth += healAmount;
-            ClampHealth();
+            _currentValue += healAmount;
+            ClampValue();
         }        
     }
 }

@@ -31,10 +31,7 @@ public class Enemy : MonoBehaviour
             if (_isChase)
                 _enemyMover.Move(_chase.GetTarget());
 
-            if (sqrDistanceToTarget < _sqrDistanceToAttack)
-                _isChase = false;
-            else
-                _isChase = true;
+            _isChase = sqrDistanceToTarget >= _sqrDistanceToAttack;
         }
         else
         {
