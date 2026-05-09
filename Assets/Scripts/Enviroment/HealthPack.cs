@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class HealthPack : Collectible
+public class HealthPack : Item
 {
     private int _healAmount = 15;
 

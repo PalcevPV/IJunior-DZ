@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract class Collectible : MonoBehaviour
+public abstract class Item : MonoBehaviour
 {
     public abstract void Pick();
 }

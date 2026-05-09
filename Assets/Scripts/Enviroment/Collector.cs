@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class Collector : MonoBehaviour
 {
-    public event Action<Collectible> TriggerEntered;
+    public event Action<Item> TriggerEntered;
 
     private void OnTriggerEnter2D(Collider2D item)
     {
-        if (item.TryGetComponent(out Collectible collectible))
+        if (item.TryGetComponent(out Item collectible))
         {
             TriggerEntered?.Invoke(collectible);
             Debug.Log(collectible.GetType());

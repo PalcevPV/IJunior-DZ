@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Coin : Collectible
+public class Coin : Item
 {
     public event Action<Coin> Collected;
 

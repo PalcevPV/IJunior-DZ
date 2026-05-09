@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);
     }
 
-    private void CollectItem(Collectible collectible)
+    private void CollectItem(Item collectible)
     {
         switch (collectible)
         {
