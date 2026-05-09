@@ -6,7 +6,7 @@ using UnityEngine;
     {
         if (healAmount > 0)
         {
-            _currentValue += healAmount;
+            CurrentValue += healAmount;
             ClampValue();
         }        
     }
