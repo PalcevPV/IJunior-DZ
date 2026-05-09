@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(WallChecker), typeof(Rotater), typeof(Rigidbody2D))]
 public class EnemyMover : MonoBehaviour
 {
     private WallChecker _wallChecker;

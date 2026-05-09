@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerAnimator), typeof(PlayerHealth), typeof(Bag))]
+[RequireComponent(typeof(InputReader), typeof(GroundChecker), typeof(PlayerMover))]
+[RequireComponent(typeof(AttackSystem), typeof(Rotater), typeof(Collector))]
 public class Player : MonoBehaviour
 {
     private PlayerAnimator _animator;

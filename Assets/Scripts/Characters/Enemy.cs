@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent (typeof(EnemyMover), typeof(Patrol), typeof(AttackSystem))]
+[RequireComponent (typeof(EnemyAnimator), typeof(Chase))]
 public class Enemy : MonoBehaviour
 {
     private EnemyAnimator _enemyAnimator;
