@@ -11731,6 +11731,10 @@ PrefabInstance:
       propertyPath: _targetMask.m_Bits
       value: 256
       objectReference: {fileID: 0}
+    - target: {fileID: 3996300029139066074, guid: 0483143b85a6daa4b95173c846f6cdaf, type: 3}
+      propertyPath: _groundMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4068711867627046999, guid: 0483143b85a6daa4b95173c846f6cdaf, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -11783,7 +11787,8 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3996300029139066074, guid: 0483143b85a6daa4b95173c846f6cdaf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4175688878047162753, guid: 0483143b85a6daa4b95173c846f6cdaf, type: 3}
@@ -11900,8 +11905,13 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 63ae75b65e3ffbb4c94047b78570c29c, type: 2}
+    - target: {fileID: 7304715282574259017, guid: 1415e40664225f94cb652c5a7cac5854, type: 3}
+      propertyPath: _groundMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7120833942139358894, guid: 1415e40664225f94cb652c5a7cac5854, type: 3}
+    - {fileID: 7304715282574259017, guid: 1415e40664225f94cb652c5a7cac5854, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7069180566536015386, guid: 1415e40664225f94cb652c5a7cac5854, type: 3}
