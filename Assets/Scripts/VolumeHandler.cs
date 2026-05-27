@@ -17,8 +17,6 @@ public class VolumeHandler : MonoBehaviour
 
     public void SetVolume(float level)
     {
-        Debug.Log(_parameterName);
-
         mixer.SetFloat(_parameterName, Mathf.Log10(level) * _dbMultiplier);
     }  
 }
