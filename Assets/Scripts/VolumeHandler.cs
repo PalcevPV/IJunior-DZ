@@ -1,27 +1,24 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class VolumeHandler : MonoBehaviour
 {
     [SerializeField] private AudioMixer mixer;
+    [SerializeField] private Slider _slider;
+    [SerializeField] private string _parameterName;
+    
+    private int _dbMultiplier = 20;
 
-    public void SetMasterVolume(float level)
+    private void Awake()
     {
-        mixer.SetFloat("MasterVolume", Mathf.Log10(level) * 20);
+        _slider.onValueChanged.AddListener(SetVolume);
     }
 
-    public void SetMusicVolume(float level)
+    public void SetVolume(float level)
     {
-        mixer.SetFloat("MusicVolume", Mathf.Log10(level) * 20);
-    }
+        Debug.Log(_parameterName);
 
-    public void SetSFXVolume(float level)
-    {
-        mixer.SetFloat("SFXVolume", Mathf.Log10(level) * 20);
-    }
-
-    public void ToggleMute(bool isOn)
-    {
-        mixer.SetFloat("MasterVolume", isOn ? -80f : 0f);
-    }
+        mixer.SetFloat(_parameterName, Mathf.Log10(level) * _dbMultiplier);
+    }  
 }
