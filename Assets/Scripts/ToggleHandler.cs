@@ -16,6 +16,11 @@ public class ToggleHandler : MonoBehaviour
         _toggle.onValueChanged.AddListener(SetMute);
     }
 
+    private void OnDestroy()
+    {
+        _toggle.onValueChanged.RemoveListener(SetMute);
+    }
+
     public void SetMute(bool isOn)
     {
         mixer.SetFloat(_parameterName, isOn ? _mute : _unmute);
