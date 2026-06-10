@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBarView : HealthUI
 {
-    protected override void UpdateHealthView(int _currentHealth, int _maxHealth)
-    {
+    [SerializeField] private Slider _slider;
 
+    protected override void UpdateHealthView(float currentHealth, float maxHealth)
+    {
+        _slider.value = currentHealth;
     }
 }

@@ -4,8 +4,10 @@ public abstract class HealthUI : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
-    protected int _currentHealth;
-    protected int _maxHealth;
+    private void Start()
+    {
+        UpdateHealthView(_health.CurrentValue, _health.MaxValue);
+    }
 
     private void OnEnable()
     {
@@ -17,5 +19,5 @@ public abstract class HealthUI : MonoBehaviour
         _health.HealthChanged -= UpdateHealthView;
     }
 
-    protected abstract void UpdateHealthView(int _currentHealth, int _maxHealth);
+    protected abstract void UpdateHealthView(float currentHealth, float maxHealth);
 }
