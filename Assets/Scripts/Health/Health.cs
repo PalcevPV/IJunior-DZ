@@ -9,9 +9,6 @@ using UnityEngine;
 
     public event Action<float, float> AmountChanged;
 
-    public float MaxValue => _maxValue;
-    public float CurrentValue => _currentValue;
-
     private void Awake()
     {
         _currentValue = _maxValue;

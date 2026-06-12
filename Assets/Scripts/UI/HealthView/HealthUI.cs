@@ -6,7 +6,7 @@ public abstract class HealthUI : MonoBehaviour
 
     private void Start()
     {
-        UpdateHealthView(_health.CurrentValue, _health.MaxValue);
+        UpdateHealthView(_health._currentValue, _health._maxValue);
     }
 
     private void OnEnable()
