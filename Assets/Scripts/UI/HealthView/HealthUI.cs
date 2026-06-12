@@ -11,12 +11,12 @@ public abstract class HealthUI : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.HealthChanged += UpdateHealthView;
+        _health.AmountChanged += UpdateHealthView;
     }
 
     private void OnDisable()
     {
-        _health.HealthChanged -= UpdateHealthView;
+        _health.AmountChanged -= UpdateHealthView;
     }
 
     protected abstract void UpdateHealthView(float currentHealth, float maxHealth);

@@ -5,13 +5,18 @@ using UnityEngine.UI;
 public class SmoothHealthBarView : HealthUI
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private float _speed = 5;
+    [SerializeField] private float _speed;
     private Coroutine _coroutine;
     private float _targetHealth;
 
     protected override void UpdateHealthView(float currentHealth, float maxHealth)
     {
-        _targetHealth = currentHealth;
+        _targetHealth = currentHealth / maxHealth;
+
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
 
         _coroutine = StartCoroutine(AnimateHealthIndicator());
     }
@@ -24,8 +29,5 @@ public class SmoothHealthBarView : HealthUI
 
             yield return null;
         }
-
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
     }
 }

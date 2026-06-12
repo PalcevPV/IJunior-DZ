@@ -7,6 +7,6 @@ public class HealthBarView : HealthUI
 
     protected override void UpdateHealthView(float currentHealth, float maxHealth)
     {
-        _slider.value = currentHealth;
+        _slider.value = currentHealth / maxHealth;
     }
 }
