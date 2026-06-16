@@ -31,7 +31,7 @@ public class AttackSystem : MonoBehaviour
 
         foreach (var hit in hits)
         {
-            if (hit.GetComponentInParent<IDamageable>() is IDamageable target)
+            if (hit.TryGetComponent(out IDamageable target))
             {
                 if (damaged.Add(target))
                 {

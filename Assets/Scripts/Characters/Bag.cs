@@ -1,11 +1,15 @@
+using System;
 using UnityEngine;
 
 public class Bag : MonoBehaviour
 {
-    private int _coinCount = 0;
+    public int CoinCount { get; private set; } = 0;
+
+    public event Action<int> CoinsCountChanged;
 
     public void AddCoin()
     {
-        _coinCount++;
+        CoinCount++;
+        CoinsCountChanged?.Invoke(CoinCount);
     }
 }

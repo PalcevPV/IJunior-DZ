@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-abstract class Health : MonoBehaviour, IDamageable
+public class Health : MonoBehaviour, IDamageable, IHealable
 {
     private float MinValue = 0;
     public float MaxValue { get; private set; } = 100;
@@ -19,6 +19,14 @@ abstract class Health : MonoBehaviour, IDamageable
         if (damage > 0)
         {
             ChangeHealth(-damage);
+        }
+    }
+
+    public void TakeHeal(int healAmount)
+    {
+        if (healAmount > 0)
+        {
+            ChangeHealth(healAmount);
         }
     }
 

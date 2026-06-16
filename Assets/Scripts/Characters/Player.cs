@@ -1,13 +1,13 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerAnimator), typeof(PlayerHealth), typeof(Bag))]
+[RequireComponent(typeof(PlayerAnimator), typeof(Health), typeof(Bag))]
 [RequireComponent(typeof(InputReader), typeof(GroundChecker), typeof(PlayerMover))]
 [RequireComponent(typeof(AttackSystem), typeof(Rotater), typeof(Collector))]
 public class Player : MonoBehaviour
 {
     private PlayerAnimator _animator;
-    private PlayerHealth _health;
+    private Health _health;
     private Bag _bag;
     private InputReader _inputReader;
     private GroundChecker _groundChecker;
@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         _rotation = GetComponent<Rotater>();
         _attackSystem = GetComponent<AttackSystem>();
         _collisionHandler = GetComponent<Collector>();
-        _health = GetComponent<PlayerHealth>();
+        _health = GetComponent<Health>();
         _bag = GetComponent<Bag>();
     }
 
@@ -64,11 +64,7 @@ public class Player : MonoBehaviour
     {
         float direction = _inputReader.Direction;
 
-        if (direction != _lastDirection)
-        {
-            _rotation.Flip(_inputReader.Direction);
-            _lastDirection = direction;
-        }
+        _rotation.Flip(_inputReader.Direction);
 
         _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);
     }
