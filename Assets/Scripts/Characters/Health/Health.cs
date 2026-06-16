@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 
 abstract class Health : MonoBehaviour, IDamageable
 {
-    protected int MaxValue = 100;
-    protected int MinValue = 0;
-    protected int CurrentValue;
+    private float MinValue = 0;
+    public float MaxValue { get; private set; } = 100;
+    public float CurrentValue { get; private set; }
+
+    public event Action<float, float> AmountChanged;
 
     private void Awake()
     {
@@ -15,13 +18,14 @@ abstract class Health : MonoBehaviour, IDamageable
     {
         if (damage > 0)
         {
-            CurrentValue -= damage;
-            ClampValue();
-        }     
+            ChangeHealth(-damage);
+        }
     }
 
-    protected void ClampValue()
+    protected void ChangeHealth(float healthCount)
     {
+        CurrentValue += healthCount;
         CurrentValue = Mathf.Clamp(CurrentValue, MinValue, MaxValue);
+        AmountChanged?.Invoke(CurrentValue, MaxValue);
     }
 }

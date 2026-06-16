@@ -10,7 +10,6 @@ public class Collector : MonoBehaviour
         if (item.TryGetComponent(out Item collectible))
         {
             TriggerEntered?.Invoke(collectible);
-            Debug.Log(collectible.GetType());
         }
     }
 }
