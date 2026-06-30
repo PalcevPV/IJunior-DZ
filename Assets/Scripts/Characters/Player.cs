@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerAnimator), typeof(Health), typeof(Bag))]
 [RequireComponent(typeof(InputReader), typeof(GroundChecker), typeof(PlayerMover))]
 [RequireComponent(typeof(AttackSystem), typeof(Rotater), typeof(Collector))]
+[RequireComponent(typeof(Vampirism))]
 public class Player : MonoBehaviour
 {
     private PlayerAnimator _animator;
@@ -15,6 +16,7 @@ public class Player : MonoBehaviour
     private AttackSystem _attackSystem;
     private Rotater _rotation;
     private Collector _collisionHandler;
+    private Vampirism _vampirism;
 
     private float _lastDirection;
 
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         _collisionHandler = GetComponent<Collector>();
         _health = GetComponent<Health>();
         _bag = GetComponent<Bag>();
+        _vampirism = GetComponent<Vampirism>();
     }
 
     private void OnEnable()
@@ -58,12 +61,15 @@ public class Player : MonoBehaviour
             if (_attackSystem.TryAttack())
                 _animator.PlayAttack();
         }
+
+        if (_inputReader.GetIsAbility())
+        {
+            _vampirism.TryActivate();
+        }
     }
 
     private void Update()
     {
-        float direction = _inputReader.Direction;
-
         _rotation.Flip(_inputReader.Direction);
 
         _animator.UpdateMovement(_inputReader.Direction, _groundChecker.IsGrounded);

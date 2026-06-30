@@ -6,7 +6,9 @@ public class InputReader : MonoBehaviour
 
     private bool _isJump;
     private bool _isAttack;
+    private bool _isAbilityActive;
     private int _attackButton = 0;
+    private int _abilityButton = 1;
     private KeyCode _jumpButton = KeyCode.Space;
 
     public float Direction { get; private set; }
@@ -24,10 +26,16 @@ public class InputReader : MonoBehaviour
         {
             _isAttack = true;
         }
+
+        if (Input.GetMouseButton(_abilityButton))
+        {
+            _isAbilityActive = true;
+        }
     }
 
     public bool GetIsJump() => GetBoolAsTrigger(ref _isJump);
     public bool GetIsAttack() => GetBoolAsTrigger(ref _isAttack);
+    public bool GetIsAbility() => GetBoolAsTrigger(ref _isAbilityActive);
 
     private bool GetBoolAsTrigger(ref bool value)
     {
