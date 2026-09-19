@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5440630168d36d0458aeb0bde53b8cbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 5
+  _delay: 3
   _lowerBound: -2
   _upperBound: 6
   _pool: {fileID: 130259136}
@@ -1076,6 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePoint: {fileID: 564920877}
+  _faction: 0
   _bulletPool: {fileID: 1645367753}
 --- !u!1 &1164115719
 GameObject:
@@ -2488,8 +2489,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 4421558286275942090, guid: 9dbe9d1fb19760e47a8fa592076de94b, type: 3}
-  _poolCapacity: 5
-  _poolMaxSize: 5
+  _poolCapacity: 10
+  _poolMaxSize: 20
 --- !u!1 &1709520917
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _airplane: {fileID: 1041725386}
   _enemyPool: {fileID: 130259136}
+  _bulletPool: {fileID: 1645367753}
   _startScreen: {fileID: 1746215628}
   _endGameScreen: {fileID: 1570927232}
 --- !u!4 &1920805507
