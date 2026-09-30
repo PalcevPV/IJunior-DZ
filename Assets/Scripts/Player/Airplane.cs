@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(AirplaneMover), typeof(ScoreCounter), typeof(PlaneCollisionHandler))]
+[RequireComponent(typeof(AirplaneMover), typeof(PlaneCollisionHandler))]
 [RequireComponent(typeof(InputHandler), typeof(PlayerShooter))]
 public class Airplane : MonoBehaviour
 {
+    [SerializeField] private ParticalSystem _particalReset; 
     private AirplaneMover _airplaneMover;
-    private ScoreCounter _scoreCounter;
     private PlaneCollisionHandler _collisionHandler;
     private InputHandler _inputHandler;
     private PlayerShooter _playerShooter;
@@ -15,7 +15,6 @@ public class Airplane : MonoBehaviour
 
     private void Awake()
     {
-        _scoreCounter = GetComponent<ScoreCounter>();
         _collisionHandler = GetComponent<PlaneCollisionHandler>();
         _airplaneMover = GetComponent<AirplaneMover>();
         _inputHandler = GetComponent<InputHandler>();
@@ -52,7 +51,7 @@ public class Airplane : MonoBehaviour
 
     public void Reset()
     {
-        _scoreCounter.Reset();
         _airplaneMover.Reset();
+        _particalReset.Reset();
     }
 }

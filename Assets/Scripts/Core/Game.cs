@@ -7,8 +7,11 @@ public class Game : MonoBehaviour
     [SerializeField] private Airplane _airplane;
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private BulletPool _bulletPool;
+    [SerializeField] private ColumnPool _columnPool;
     [SerializeField] private StartScreen _startScreen;
     [SerializeField] private EndScreen _endGameScreen;
+    [SerializeField] private ScoreCounter _score;
+    [SerializeField] private Leaderboard _leaderboard;
 
     private void Start()
     {
@@ -45,6 +48,8 @@ public class Game : MonoBehaviour
 
     private void StopGame()
     {
+        _score.SaveBestScore();
+        _leaderboard.Show(_score.Score);
         _endGameScreen.Open();
         Time.timeScale = _stopGame;
     }
@@ -53,8 +58,10 @@ public class Game : MonoBehaviour
     {
         _enemyPool.ReleaseAll();
         _bulletPool.ReleaseAll();
+        _columnPool.ReleaseAll();
 
         Time.timeScale = _startGame;
         _airplane.Reset();
+        _score.Reset();
     }
 }
