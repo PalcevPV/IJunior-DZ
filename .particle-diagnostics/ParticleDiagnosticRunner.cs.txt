@@ -1,0 +1,81 @@
+using System;
+using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEngine;
+
+[InitializeOnLoad]
+public static class ParticleDiagnosticRunner
+{
+    private const string Active = "ParticleDiagnostic.Active";
+    static ParticleDiagnosticRunner()
+    {
+        EditorApplication.update += Update;
+    }
+
+    public static void Run()
+    {
+        var args = Environment.GetCommandLineArgs();
+        if (Array.IndexOf(args, "-particleDiagnosticCompatibility") >= 0)
+        {
+            var settings = UnityEngine.Rendering.GraphicsSettings.GetRenderPipelineSettings<UnityEngine.Rendering.Universal.RenderGraphSettings>();
+            settings.enableRenderCompatibilityMode = true;
+            Debug.Log("PARTICLE_DIAGNOSTIC_VARIANT: compatibility mode enabled");
+        }
+        EditorSceneManager.OpenScene("Assets/bird.unity");
+        if (Array.IndexOf(args, "-particleDiagnosticDefault") >= 0)
+        {
+            foreach (var particles in UnityEngine.Object.FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None))
+                UnityEngine.Object.DestroyImmediate(particles.gameObject);
+            var go = new GameObject("Default particle diagnostic");
+            go.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 5;
+            var system = go.AddComponent<ParticleSystem>();
+            var emission = system.emission;
+            emission.enabled = true;
+            emission.rateOverTime = 10;
+            var main = system.main;
+            main.loop = true;
+            main.startLifetime = 5;
+            main.startSpeed = 5;
+            main.startSize = 1;
+            main.cullingMode = ParticleSystemCullingMode.AlwaysSimulate;
+            go.GetComponent<ParticleSystemRenderer>().sharedMaterial = AssetDatabase.LoadAssetAtPath<Material>("Packages/com.unity.render-pipelines.universal/Runtime/Materials/ParticlesUnlit.mat");
+        }
+        foreach (var behaviour in UnityEngine.Object.FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            if (behaviour.GetType().Assembly.GetName().Name == "Assembly-CSharp")
+                behaviour.enabled = false;
+        foreach (var particles in UnityEngine.Object.FindObjectsByType<ParticleSystem>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            var main = particles.main;
+            main.playOnAwake = true;
+        }
+        SessionState.SetBool(Active, true);
+        SessionState.SetInt("ParticleDiagnostic.Frames", 0);
+        SessionState.SetString("ParticleDiagnostic.Start", DateTimeOffset.UtcNow.ToString("O"));
+        Debug.Log("PARTICLE_DIAGNOSTIC_START: scene particles, user behaviours disabled, graphics enabled");
+        EditorApplication.isPlaying = true;
+    }
+
+    private static void Update()
+    {
+        if (!SessionState.GetBool(Active, false) || !EditorApplication.isPlaying) return;
+        EditorApplication.QueuePlayerLoopUpdate();
+        var frames = SessionState.GetInt("ParticleDiagnostic.Frames", 0) + 1;
+        SessionState.SetInt("ParticleDiagnostic.Frames", frames);
+        if (frames == 120)
+        {
+            Time.timeScale = 1;
+            foreach (var particles in UnityEngine.Object.FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None))
+            {
+                particles.Play();
+                Debug.Log($"PARTICLE_DIAGNOSTIC_EFFECT: {particles.name}, playing={particles.isPlaying}, count={particles.particleCount}");
+            }
+        }
+        if (frames % 100000 == 0) Debug.Log($"PARTICLE_DIAGNOSTIC_PROGRESS: {frames} updates, runtime frames={Time.frameCount}");
+        if ((DateTimeOffset.UtcNow - DateTimeOffset.Parse(SessionState.GetString("ParticleDiagnostic.Start", ""))).TotalSeconds < 60) return;
+        foreach (var particles in UnityEngine.Object.FindObjectsByType<ParticleSystem>(FindObjectsSortMode.None))
+            Debug.Log($"PARTICLE_DIAGNOSTIC_FINAL_EFFECT: {particles.name}, playing={particles.isPlaying}, count={particles.particleCount}");
+        Debug.Log($"PARTICLE_DIAGNOSTIC_COMPLETE: {frames} updates, runtime frames={Time.frameCount}");
+        SessionState.SetBool(Active, false);
+        EditorApplication.Exit(0);
+    }
+}
