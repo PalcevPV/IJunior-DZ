@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class ResourceGenerator : MonoBehaviour
 {
-    [SerializeField] private Base _base; 
+    [SerializeField] private ResourceRegistry _resourceRegistry;
     private ResourcePool _pool;
 
     private void OnEnable()
     {
-        _base.ResourceReceived += OnResourceReceived;
+        _resourceRegistry.ResourceDelivered += OnResourceReceived;
     }
 
     private void OnDisable()
     {
-        _base.ResourceReceived -= OnResourceReceived;
+        _resourceRegistry.ResourceDelivered -= OnResourceReceived;
     }
 
     private void OnResourceReceived(Resource resource)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class ResourceRegistry : MonoBehaviour
     private List<Resource> _busyResources = new List<Resource>();
     private ResourceScanner _resourceScanner;
     private int _resourceIndex = 0;
+
+    public event Action<Resource> ResourceDelivered;
 
     private void Awake()
     {
@@ -47,6 +50,9 @@ public class ResourceRegistry : MonoBehaviour
 
     public void RemoveResource(Resource resource)
     {
-        _busyResources.Remove(resource);
+        if (_busyResources.Remove(resource))
+        {
+            ResourceDelivered?.Invoke(resource);
+        }
     }
 }

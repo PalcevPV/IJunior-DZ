@@ -12,6 +12,7 @@ public class Bot : MonoBehaviour
 
     public bool IsBusy { get; private set; }
     public event Action<Resource> ResourceDelivered;
+    public event Action<Bot> ArrivedToFlag;
 
     private void Awake()
     {
@@ -19,11 +20,28 @@ public class Bot : MonoBehaviour
         _rotator = GetComponent<BotRotator>();
     }
 
+    public void Restart()
+    {
+        IsBusy = false;
+    }
+
     public void Collect(Resource resource, Transform deliveryPoint)
     {
         IsBusy = true;
 
         _coroutine = StartCoroutine(DeliviryResource(resource, deliveryPoint));
+    }
+
+    public void MoveToFlag(Transform target)
+    {
+        IsBusy = true;
+        StartCoroutine(TravelToFlag(target));
+    }
+
+    private IEnumerator TravelToFlag(Transform target)
+    {
+        yield return MoveTo(target);
+        ArrivedToFlag?.Invoke(this);
     }
 
     private IEnumerator DeliviryResource(Resource target, Transform deliveryPoint)

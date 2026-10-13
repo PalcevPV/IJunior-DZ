@@ -7,7 +7,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private ResourceData[] _resources;
     [SerializeField] private Bounds _spawnBounds;
 
-    private float _delay = 5f;
+    [SerializeField] private float _delay = 5f;
 
     private void Awake()
     {
