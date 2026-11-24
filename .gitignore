@@ -4,6 +4,7 @@
 #
 .utmp/
 /[Ll]ibrary/
+/.particle-diagnostics/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
