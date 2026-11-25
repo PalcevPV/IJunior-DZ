@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour
 
     private CharacterController _controller;
     private InputHandler _input;
-    private float _verticalSpeed = -2f;
+    private float _verticalSpeed = -4f;
 
     private void Awake()
     {
